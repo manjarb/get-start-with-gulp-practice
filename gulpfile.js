@@ -5,6 +5,8 @@ var sass = require('gulp-sass');
 var uglify = require('gulp-uglify');
 var jshint = require('gulp-jshint');
 var imagemin = require('gulp-imagemin');
+var connect = require('connect');
+var serve = require('serve-static');
 
 gulp.task('styles', function () {
     return gulp.src('app/css/*.css')
@@ -39,6 +41,14 @@ gulp.task('watch', function () {
     gulp.watch('app/css/*.css', ['styles']);
     gulp.watch('app/js/*.js', ['scripts']);
     gulp.watch('app/img/*', ['images']);
+});
+
+gulp.task('server', function () {
+   return connect().use(serve(__dirname))
+       .listen(8080)
+       .on('listening', function () {
+          console.log('Server Running: View at http://localhost:8080');
+       });
 });
 
 gulp.task('default', ['styles', 'scripts', 'images', 'watch']);

@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/manjarb/get-start-with-gulp-practice#readme",
   "devDependencies": {
+    "connect": "^3.6.6",
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.1",
     "gulp-imagemin": "^4.1.0",
@@ -24,6 +25,7 @@
     "gulp-myth": "^1.1.0",
     "gulp-sass": "^4.0.1",
     "gulp-uglify": "^3.0.0",
-    "jshint": "^2.9.5"
+    "jshint": "^2.9.5",
+    "serve-static": "^1.13.2"
   }
 }
