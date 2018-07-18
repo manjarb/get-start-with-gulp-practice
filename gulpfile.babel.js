@@ -1,24 +1,22 @@
-var gulp = require('gulp');
-var concat = require('gulp-concat');
-var myth = require('gulp-myth');
-var sass = require('gulp-sass');
-var uglify = require('gulp-uglify');
-var jshint = require('gulp-jshint');
-var imagemin = require('gulp-imagemin');
-var connect = require('connect');
-var serve = require('serve-static');
-var browsersync = require('browser-sync');
-var postcss = require('gulp-postcss'); // Added
-var cssnext = require('postcss-cssnext'); // Added
-var cssnano = require('cssnano'); // Added
-var browserify = require('browserify'); // Added
-var source = require('vinyl-source-stream'); // Added
-var buffer = require('vinyl-buffer'); // Added
-var babelify = require('babelify'); // Added
-var plumber = require('gulp-plumber'); // Added
-var beeper = require('beeper'); // Added
-var del = require('del'); // Added
-var sourcemaps = require('gulp-sourcemaps'); // Added
+// Load Node Modules/Plugins
+import gulp from 'gulp';
+import concat from 'gulp-concat';
+import uglify from 'gulp-uglify';
+import jshint from 'gulp-jshint';
+import imagemin from 'gulp-imagemin';
+import connect from 'connect';
+import serve from 'serve-static';
+import browsersync from 'browser-sync';
+import postcss from 'gulp-postcss';
+import cssnext from 'postcss-cssnext';
+import cssnano from 'cssnano';
+import browserify from 'browserify';
+import source from 'vinyl-source-stream';
+import buffer from 'vinyl-buffer';
+import plumber from 'gulp-plumber';
+import beeper from 'beeper';
+import del from 'del';
+import sourcemaps from 'gulp-sourcemaps';
 
 // Error Handler
 function onError(err) {
@@ -63,14 +61,14 @@ gulp.task('styles', ['clean'], function () {
 });
 
 gulp.task('scripts', function () {
-   return gulp.src('app/js/*.js')
-       .pipe(sourcemaps.init()) // Added
-       .pipe(jshint())
-       .pipe(jshint.reporter('default'))
-       .pipe(concat('all.js'))
-       .pipe(uglify())
-       .pipe(sourcemaps.write()) // Added
-       .pipe(gulp.dest('dist'));
+    return gulp.src('app/js/*.js')
+        .pipe(sourcemaps.init()) // Added
+        .pipe(jshint())
+        .pipe(jshint.reporter('default'))
+        .pipe(concat('all.js'))
+        .pipe(uglify())
+        .pipe(sourcemaps.write()) // Added
+        .pipe(gulp.dest('dist'));
 });
 
 // Browserify Task
@@ -86,9 +84,9 @@ gulp.task('browserify', function() {
 });
 
 gulp.task('images', function () {
-   return gulp.src('app/img/*')
-       .pipe(imagemin())
-       .pipe(gulp.dest('dist/img'));
+    return gulp.src('app/img/*')
+        .pipe(imagemin())
+        .pipe(gulp.dest('dist/img'));
 });
 
 gulp.task('watch', function () {
@@ -98,23 +96,23 @@ gulp.task('watch', function () {
 });
 
 gulp.task('server', function () {
-   return connect().use(serve(__dirname))
-       .listen(8080)
-       .on('listening', function () {
-          console.log('Server Running: View at http://localhost:8080');
-       });
+    return connect().use(serve(__dirname))
+        .listen(8080)
+        .on('listening', function () {
+            console.log('Server Running: View at http://localhost:8080');
+        });
 });
 
 gulp.task('browsersync', function () {
-   return browsersync({
-      server: {
-          baseDir: './'
-      }
-   });
+    return browsersync({
+        server: {
+            baseDir: './'
+        }
+    });
 });
 
 gulp.task('clean', function () {
-   return del(['dist']);
+    return del(['dist']);
 });
 
 gulp.task('default', ['styles', 'scripts', 'images', 'browsersync', 'watch']);
